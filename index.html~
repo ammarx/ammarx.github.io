@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +25,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+	   body { background: #F8F8FF; }
+	</style>
+
     </head>
+
+
+
     <body>
 
 	<br>
@@ -35,7 +44,7 @@
 	  <a href="mailto:ammar.ahmad1993@gmail.com" class="btn btn-danger" role="button"><i class ="fa fa-envelope-o fa-2x"></i> Contact Me</a>
 	<div class="pull-right">
 	  <a href="https://github.com/ammarx/" class="btn btn-success" role="button"><i class="fa fa-github fa-2x"></i></a>
-	  <a href="https://github.com/ammarx/" class="btn btn-primary" role="button"><i class="fa fa-facebook-f fa-2x"></i></a>	
+	  <a href="https://www.facebook.com/ammar.ahmad1993x" class="btn btn-primary" role="button"><i class="fa fa-facebook-f fa-2x"></i></a>	
 	</div>
 
 
