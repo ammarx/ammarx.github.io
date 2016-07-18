@@ -1,0 +1,1130 @@
+<html>
+<head>
+<style>
+
+.centered {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	/* bring your own prefixes */
+	transform: translate(-50%, -50%);
+	border-width:5px;	
+	border-style:dashed;
+}
+
+.button {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 16px 0px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+	height: 80px;
+	width: 80px;
+
+}
+
+.button1 {
+	background-color: white; 
+	color: black; 
+	border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.button2 {
+	background-color: white; 
+	color: black; 
+	border: 2px solid #008CBA;
+}
+
+.button2:hover {
+	background-color: #008CBA;
+	color: white;
+}
+
+.button3 {
+	background-color: white; 
+	color: black; 
+	border: 2px solid #f44336;
+}
+
+.button3:hover {
+	background-color: #f44336;
+	color: white;
+}
+
+.button4 {
+	background-color: white;
+	color: black;
+	border: 2px solid #e7e7e7;
+}
+
+.button4:hover {background-color: #e7e7e7;}
+
+.button5 {
+	background-color: white;
+	color: black;
+	border: 2px solid #555555;
+}
+
+.button5:hover {
+	background-color: #555555;
+	color: white;
+}
+
+.dottedbdr {
+	border-width:5px;	
+	border-style:dashed;
+}
+
+<!-- pls no delete this -->
+
+.button3x {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #f44336;
+}
+
+.button3x:hover {
+    background-color: #f44336;
+    color: white;
+}
+
+.buttonx {
+    background-color: #f44336; /* RED */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    height: 80px;
+    width: 80px;
+}
+
+.buttonxyellow {
+    background-color: #FF8C00; /* YELLOW */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    height: 80px;
+    width: 80px;
+}
+</style>
+
+<script>
+var myParam_id;
+
+function getQueryStrings() 
+{ 
+	var assoc  = {};
+	var decode = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); };
+	var queryString = location.search.substring(1); 
+	var keyValues = queryString.split('&'); 
+
+	for(var i in keyValues) 
+	{ 
+		var key = keyValues[i].split('=');
+		if (key.length > 1) 
+		{
+			assoc[decode(key[0])] = decode(key[1]);
+		}
+	}	 
+	return assoc; 
+}
+
+var head_score = 0;
+var tails_score = 0;
+var isBot = "false";
+function getID()
+{	
+	var qs = getQueryStrings();
+	myParam_id = qs["id"];
+	head_score = qs["o"];
+	tails_score = qs["x"];
+	
+	try {
+		isBot = qs["bot"];
+	} catch (err) {
+		isBot = "false";
+	}
+	
+	try {
+		parseInt(head_score) = qs["o"]; 
+		parseInt(tails_score) = qs["x"]; 
+		document.getElementById("heads_o_text").innerHTML = qs["o"];
+		document.getElementById("tails_x_text").innerHTML = qs["x"];
+	} catch(err) {
+		//nothing to do... just set values to zero
+		head_score = 0;
+		tails_score = 0;
+	}
+	//document.write(myParam_id);
+	if (myParam_id == "tails")
+	{
+		//TAILS (X)
+		inst = 0;
+		alert("Tails (X) Goes first!");
+	} else if (myParam_id == "heads") {
+		//HEADS (O)
+		inst = 1;
+		alert("Heads (O) Goes first!");
+		if (myParam_id == "heads" && isBot == "true")
+		{
+			var selector = Math.floor((Math.random() * 9) + 1); 
+			game(selector);
+		}
+	} else {
+		//something went wrong...
+		alert("Something went wrong with the toss.. please try again...");
+		window.location.href='index.html';
+	}
+
+	
+}
+
+var inst = 0;
+
+var n1 = "n/a";
+var n2 = "n/a";
+var n3 = "n/a";
+var n4 = "n/a";
+var n5 = "n/a";
+var n6 = "n/a";
+var n7 = "n/a";
+var n8 = "n/a";
+var n9 = "n/a";
+
+function game(val_)
+{
+	gameWon = "false";
+	if(val_ == 1 && inst == 0)
+	{
+		//write x
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "block";	//show
+		document.getElementById("_x_tails").style.display = "none";	//hide
+		
+		document.getElementById("1").innerHTML = "X";
+		document.getElementById("1").disabled = true; 
+		inst = 1;
+		n1 = "x";
+		checkwin();
+	} else if(val_ == 1 && inst == 1)
+	{
+		//write o
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "none";	//hide
+		document.getElementById("_x_tails").style.display = "block";	//show
+		
+		document.getElementById("1").innerHTML = "O";
+		document.getElementById("1").disabled = true; 
+		inst = 0;
+		n1 = "o";
+		checkwin();
+
+	} else if(val_ == 2 && inst == 0)
+	{
+		//write x
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "block";	//show
+		document.getElementById("_x_tails").style.display = "none";	//hide
+		
+		document.getElementById("2").innerHTML = "X";
+		document.getElementById("2").disabled = true; 
+		inst = 1;
+		n2 = "x";
+		checkwin();
+
+	} else if(val_ == 2 && inst == 1)
+	{
+		//write o
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "none";	//hide
+		document.getElementById("_x_tails").style.display = "block";	//show
+		
+		document.getElementById("2").innerHTML = "O";
+		document.getElementById("2").disabled = true; 
+		inst = 0;
+		n2 = "o";
+		checkwin();
+	} else if(val_ == 3 && inst == 0)
+	{
+		//write x
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "block";	//show
+		document.getElementById("_x_tails").style.display = "none";	//hide
+		
+		document.getElementById("3").innerHTML = "X";
+		document.getElementById("3").disabled = true; 
+		inst = 1;
+		n3 = "x";
+		checkwin();
+
+	} else if(val_ == 3 && inst == 1)
+	{
+		//write o
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "none";	//hide
+		document.getElementById("_x_tails").style.display = "block";	//show
+		
+		document.getElementById("3").innerHTML = "O";
+		document.getElementById("3").disabled = true; 
+		inst = 0;
+		n3 = "o";
+		checkwin();
+
+	} else if(val_ == 4 && inst == 0)
+	{
+		//write x
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "block";	//show
+		document.getElementById("_x_tails").style.display = "none";	//hide
+		
+		document.getElementById("4").innerHTML = "X";
+		document.getElementById("4").disabled = true; 
+		inst = 1;
+		n4 = "x";
+		checkwin();
+
+	} else if(val_ == 4 && inst == 1)
+	{
+		//write o
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "none";	//hide
+		document.getElementById("_x_tails").style.display = "block";	//show
+		
+		document.getElementById("4").innerHTML = "O";
+		document.getElementById("4").disabled = true; 
+		inst = 0;
+		n4 = "o";
+		checkwin();
+
+	} else if(val_ == 5 && inst == 0)
+	{
+		//write x
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "block";	//show
+		document.getElementById("_x_tails").style.display = "none";	//hide
+		
+		document.getElementById("5").innerHTML = "X";
+		document.getElementById("5").disabled = true; 
+		inst = 1;
+		n5 = "x";
+		checkwin();
+
+	} else if(val_ == 5 && inst == 1)
+	{
+		//write o
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "none";	//hide
+		document.getElementById("_x_tails").style.display = "block";	//show
+		
+		document.getElementById("5").innerHTML = "O";
+		document.getElementById("5").disabled = true; 
+		inst = 0;
+		n5 = "o";
+		checkwin();
+
+	} else if(val_ == 6 && inst == 0)
+	{
+		//write x
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "block";	//show
+		document.getElementById("_x_tails").style.display = "none";	//hide
+		
+		document.getElementById("6").innerHTML = "X";
+		document.getElementById("6").disabled = true; 
+		inst = 1;
+		n6 = "x";
+		checkwin();
+
+	} else if(val_ == 6 && inst == 1)
+	{
+		//write o
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "none";	//hide
+		document.getElementById("_x_tails").style.display = "block";	//show
+		
+		document.getElementById("6").innerHTML = "O";
+		document.getElementById("6").disabled = true; 
+		inst = 0;
+		n6 = "o";
+		checkwin();
+
+	} else if(val_ == 7 && inst == 0)
+	{
+		//write x
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "block";	//show
+		document.getElementById("_x_tails").style.display = "none";	//hide
+		
+		document.getElementById("7").innerHTML = "X";
+		document.getElementById("7").disabled = true; 
+		inst = 1;
+		n7 = "x";
+		checkwin();
+
+	} else if(val_ == 7 && inst == 1)
+	{
+		//write o
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "none";	//hide
+		document.getElementById("_x_tails").style.display = "block";	//show
+		
+		document.getElementById("7").innerHTML = "O";
+		document.getElementById("7").disabled = true; 
+		inst = 0;
+		n7 = "o";
+		checkwin();
+
+	} else if(val_ == 8 && inst == 0)
+	{
+		//write x
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "block";	//show
+		document.getElementById("_x_tails").style.display = "none";	//hide
+		
+		document.getElementById("8").innerHTML = "X";
+		document.getElementById("8").disabled = true; 
+		inst = 1;
+		n8 = "x";
+		checkwin();
+
+	} else if(val_ == 8 && inst == 1)
+	{
+		//write o
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "none";	//hide
+		document.getElementById("_x_tails").style.display = "block";	//show
+		
+		document.getElementById("8").innerHTML = "O";
+		document.getElementById("8").disabled = true; 
+		inst = 0;
+		n8 = "o";
+		checkwin();
+
+	} else if(val_ == 9 && inst == 0)
+	{
+		//write x
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "block";	//show
+		document.getElementById("_x_tails").style.display = "none";	//hide
+		
+		document.getElementById("9").innerHTML = "X";
+		document.getElementById("9").disabled = true; 
+		inst = 1;
+		n9 = "x";
+		checkwin();
+
+	} else if(val_ == 9 && inst == 1)
+	{
+		//write o
+		//HEADS (O) -  0  TAILS (X) -  0 
+		document.getElementById("_x_heads").style.display = "none";	//hide
+		document.getElementById("_x_tails").style.display = "block";	//show
+
+		document.getElementById("9").innerHTML = "O";
+		document.getElementById("9").disabled = true; 
+		inst = 0;
+		n9 = "o";
+		checkwin();
+
+	}
+
+	//=====================================================bot mode=====================================================
+	//=====================================================bot mode=====================================================
+	//=====================================================bot mode=====================================================
+	//=====================================================bot mode=====================================================
+	//=====================================================bot mode=====================================================
+
+	if (inst == 1 && isBot == "true" && gameWon == "false")
+	{
+		//randomize!
+		for(;;)
+		{
+			var selector = Math.floor((Math.random() * 9) + 1); 
+			if (n1 == "n/a" && selector == "1")
+			{
+				game(selector);
+				break;
+			} else if (n2 == "n/a" && selector == "2")
+			{
+				game(selector);
+				break;
+			} else if (n3 == "n/a" && selector == "3")	
+			{
+				game(selector);
+				break;
+			} else if (n4 == "n/a" && selector == "4")
+			{
+				game(selector);	
+				break;
+			} else if (n5 == "n/a" && selector == "5")
+			{
+				game(selector);
+				break;
+			} else if (n6 == "n/a" && selector == "6")
+			{
+				game(selector);
+				break;
+			} else if (n7 == "n/a" && selector == "7")
+			{
+				game(selector);
+				break;
+			} else if (n8 == "n/a" && selector == "8")
+			{
+				game(selector);
+				break;
+			} else if (n9 == "n/a" && selector == "9")
+			{
+				game(selector);
+				break;
+			}
+		}
+	}
+	
+	//check if user wins...
+	//HEADS (O) -   TAILS (X) -  
+	function checkwin()
+	{
+	if (n1 == "x" && n2 == "x" && n3 == "x")	//---1
+	{
+		gameWon = "true";
+		document.getElementById("1").className = "buttonx button3x"; 
+		document.getElementById("2").className = "buttonx button3x"; 
+		document.getElementById("3").className = "buttonx button3x"; 
+		
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player X wins!");
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n1 == "o" && n2 == "o" && n3 == "o")	//---1
+	{
+		gameWon = "true";
+		document.getElementById("1").className = "buttonx button3x"; 
+		document.getElementById("2").className = "buttonx button3x"; 
+		document.getElementById("3").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+		//alert("Player O wins!");
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n4 == "x" && n5 == "x" && n6 == "x") //---2
+	{
+		gameWon = "true";
+		document.getElementById("4").className = "buttonx button3x"; 
+		document.getElementById("5").className = "buttonx button3x"; 
+		document.getElementById("6").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player X wins!");
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n4 == "o" && n5 == "o" && n6 == "o")	//---2
+	{
+		gameWon = "true";
+		document.getElementById("4").className = "buttonx button3x"; 
+		document.getElementById("5").className = "buttonx button3x"; 
+		document.getElementById("6").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player O wins!");
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n7 == "x" && n8 == "x" && n9 == "x")	//---3
+	{
+		gameWon = "true";
+		document.getElementById("7").className = "buttonx button3x"; 
+		document.getElementById("8").className = "buttonx button3x"; 
+		document.getElementById("9").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player X wins!");
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1000);
+	} else if (n7 == "o" && n8 == "o" && n9 == "o")	//---3
+	{
+		gameWon = "true";
+		document.getElementById("7").className = "buttonx button3x"; 
+		document.getElementById("8").className = "buttonx button3x"; 
+		document.getElementById("9").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player O wins!");
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n1 == "x" && n4 == "x" && n7 == "x")	//|||1
+	{
+		gameWon = "true";
+		document.getElementById("1").className = "buttonx button3x"; 
+		document.getElementById("4").className = "buttonx button3x"; 
+		document.getElementById("7").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player X wins!");
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n1 == "o" && n4 == "o" && n7 == "o")	//|||1
+	{
+		gameWon = "true";
+		document.getElementById("1").className = "buttonx button3x"; 
+		document.getElementById("4").className = "buttonx button3x"; 
+		document.getElementById("7").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player O wins!");
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n2 == "x" && n5 == "x" && n8 == "x")	//|||2
+	{
+		gameWon = "true";
+		document.getElementById("2").className = "buttonx button3x"; 
+		document.getElementById("5").className = "buttonx button3x"; 
+		document.getElementById("8").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player X wins!");
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n2 == "o" && n5 == "o" && n8 == "o")	//|||2
+	{
+		gameWon = "true";
+		document.getElementById("2").className = "buttonx button3x"; 
+		document.getElementById("5").className = "buttonx button3x"; 
+		document.getElementById("8").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player O wins!");
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n3 == "x" && n6 == "x" && n9 == "x")	//|||3
+	{
+		gameWon = "true";
+		document.getElementById("3").className = "buttonx button3x"; 
+		document.getElementById("6").className = "buttonx button3x"; 
+		document.getElementById("9").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player X wins!");
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n3 == "o" && n6 == "o" && n9 == "o")	//|||3
+	{
+		gameWon = "true";
+		document.getElementById("3").className = "buttonx button3x"; 
+		document.getElementById("6").className = "buttonx button3x"; 
+		document.getElementById("9").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player O wins!");
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n1 == "x" && n5 == "x" && n9 == "x")	//\\\DIG
+	{
+		gameWon = "true";
+		document.getElementById("1").className = "buttonx button3x"; 
+		document.getElementById("5").className = "buttonx button3x"; 
+		document.getElementById("9").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player X wins!");
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n1 == "o" && n5 == "o" && n9 == "o")	//\\\DIG
+	{
+		gameWon = "true";
+		document.getElementById("1").className = "buttonx button3x"; 
+		document.getElementById("5").className = "buttonx button3x"; 
+		document.getElementById("9").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player O wins!");
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n3 == "x" && n5 == "x" && n7 == "x")	/////DIG
+	{
+		gameWon = "true";
+		document.getElementById("3").className = "buttonx button3x"; 
+		document.getElementById("5").className = "buttonx button3x"; 
+		document.getElementById("7").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player X wins!");
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n3 == "o" && n5 == "o" && n7 == "o")	/////DIG
+	{
+		gameWon = "true";
+		document.getElementById("3").className = "buttonx button3x"; 
+		document.getElementById("5").className = "buttonx button3x"; 
+		document.getElementById("7").className = "buttonx button3x"; 
+
+		document.getElementById("1").disabled = true; 
+		document.getElementById("2").disabled = true; 
+		document.getElementById("3").disabled = true; 
+		document.getElementById("4").disabled = true; 
+		document.getElementById("5").disabled = true; 
+		document.getElementById("6").disabled = true; 
+		document.getElementById("7").disabled = true; 
+		document.getElementById("8").disabled = true; 
+		document.getElementById("9").disabled = true; 
+
+		//alert("Player O wins!");
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	} else if (n1 != "n/a" && n2 != "n/a" && n3 != "n/a" && n4 != "n/a" && n5 != "n/a" && n6 != "n/a" && n7 != "n/a" && n8 != "n/a" && n9 != "n/a")
+	{
+		gameWon = "true";
+		document.getElementById("1").className = "buttonxyellow button3x"; 
+		document.getElementById("2").className = "buttonxyellow button3x"; 
+		document.getElementById("3").className = "buttonxyellow button3x"; 
+		document.getElementById("4").className = "buttonxyellow button3x"; 
+		document.getElementById("5").className = "buttonxyellow button3x"; 
+		document.getElementById("6").className = "buttonxyellow button3x"; 
+		document.getElementById("7").className = "buttonxyellow button3x"; 
+		document.getElementById("8").className = "buttonxyellow button3x"; 
+		document.getElementById("9").className = "buttonxyellow button3x"; 
+		
+		alert("DRAW!");
+		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
+		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
+		setTimeout(function(){
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+		}, 1500);
+	}
+	}
+}
+</script>
+</head>
+
+<body onload="getID()">
+	<table class="dottedbdr centered">
+		<tr>
+			<td>
+<div align="center">
+	<table>
+		<tr>
+			<tbody style="text-align:center">
+				<h3 id="pvp">Player vs Player</h3>
+			</tbody>
+			<tbody style="text-align:center">
+				<h3 id="pvb">Player vs Bot</h3>
+			</tbody>
+		</tr>
+		<script>
+			function getQueryStrings() 
+			{ 
+				var assoc  = {};
+				var decode = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); };
+				var queryString = location.search.substring(1); 
+				var keyValues = queryString.split('&'); 
+	
+				for(var i in keyValues) 
+				{ 
+					var key = keyValues[i].split('=');
+					if (key.length > 1) 
+					{
+						assoc[decode(key[0])] = decode(key[1]);
+					}
+				}	 
+				return assoc; 
+			}
+		
+			var qs = getQueryStrings();
+			if(qs["bot"] == "true")
+			{
+				document.getElementById("pvb").style.display = "block";	//show
+				document.getElementById("pvp").style.display = "none";	//hide
+		
+			} else if (qs["bot"] == "false")
+			{
+				document.getElementById("pvp").style.display = "block";	//show
+				document.getElementById("pvb").style.display = "none";	//hide
+	
+			}
+		</script>
+		<tr>	
+			<td>
+				HEADS (O) - 
+			</td>
+			<td id="heads_o_text" name="heads_o_text">
+				0
+			</td>
+			<td>
+			</td>
+			<td>
+				TAILS (X) -
+			</td>
+			<td id="tails_x_text" name="tails_x_text">
+				0
+			</td>
+
+
+			<!-- fix this part of the code... showing messagebox is just annoying... I want it to show the user in bold text -->
+			<tbody id="show_heads_" style="display:none;">
+				<td><b>
+					HEADS (O) - 
+				</b></td>
+				<td id="heads_o_text" name="heads_o_text">
+					0
+				</td>
+				<td>
+				</td>
+				<td>
+					TAILS (X) -
+				</td>
+				<td id="tails_x_text" name="tails_x_text">
+					0
+				</td>
+			</tbody>	
+
+			<tbody id="show_tails_" style="display:none;">
+				<td>
+					HEADS (O) - 
+				</td>
+				<td id="heads_o_text" name="heads_o_text">
+					0
+				</td>
+				<td>
+				</td>
+				<td><b>
+					TAILS (X) -
+				</b></td>
+				<td id="tails_x_text" name="tails_x_text">
+					0
+				</td>
+			</tbody>
+
+		</tr>
+	</table>
+</div>
+	<script>
+		function getQueryStrings() 
+		{ 
+			var assoc  = {};
+			var decode = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); };
+			var queryString = location.search.substring(1); 
+			var keyValues = queryString.split('&'); 
+
+			for(var i in keyValues) 
+			{ 
+				var key = keyValues[i].split('=');
+				if (key.length > 1) 
+				{
+					assoc[decode(key[0])] = decode(key[1]);
+				}
+			}	 
+			return assoc; 
+		}
+		
+		var qs = getQueryStrings();
+		document.getElementById("heads_o_text").innerHTML = qs["o"];
+		document.getElementById("tails_x_text").innerHTML = qs["x"];
+		/*
+		if(qs["id"] == "heads")
+		{
+			document.getElementById("show_heads_").style.display = "block"; 
+			document.getElementById("show_tails_").style.display = "none";
+		} else if (qs["id"] == "tails")
+		{
+			document.getElementById("show_heads_").style.display = "none"; 
+			document.getElementById("show_tails_").style.display = "block"; 
+		}
+		*/
+	</script>
+	<!-- this is where the actual logic of the game will be -->
+	<table>
+		<tr>
+			<td>
+				<button id="1" name="1" onclick="game(1)" class="button button2"></button>
+			</td>
+
+			<td>
+				<button id="2" name="2" onclick="game(2)" class="button button2"></button>
+			</td>
+
+			<td>
+				<button id="3" name="3" onclick="game(3)" class="button button2"></button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button id="4" name="4" onclick="game(4)" class="button button2"></button>
+			</td>
+
+			<td>
+				<button id="5" name="5" onclick="game(5)" class="button button2"></button>
+			</td>
+
+			<td>
+				<button id="6" name="6" onclick="game(6)" class="button button2"></button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button id="7" name="7" onclick="game(7)" class="button button2"></button>
+			</td>
+
+			<td>
+				<button id="8" name="8" onclick="game(8)" class="button button2"></button>
+			</td>
+
+			<td>
+				<button id="9" name="9" onclick="game(9)" class="button button2"></button>
+			</td>
+		</tr>
+		<tr>
+			<div id="_x_heads" style="display:none; text-align:center;">
+				<b>HEADS - O</b>		
+			</div>
+			<div id="_x_tails" style="display:none; text-align:center;">
+				<b>TAILS - X</b>
+			</div>
+		</tr>
+	</table>
+			</td>
+		</td>
+	</table>
+
+
+	<script>
+		//check which one to hide and unhide.
+		function getQueryStrings() 
+		{ 
+			var assoc  = {};
+			var decode = function (s) { return decodeURIComponent(s.replace(/\+/g, " ")); };
+			var queryString = location.search.substring(1); 
+			var keyValues = queryString.split('&'); 
+
+			for(var i in keyValues) 
+			{ 
+				var key = keyValues[i].split('=');
+				if (key.length > 1) 
+				{
+					assoc[decode(key[0])] = decode(key[1]);
+				}
+			}	 
+			return assoc; 
+		}
+		
+		var qs = getQueryStrings();
+		if(qs["id"] == "heads")
+		{
+			document.getElementById("_x_heads").style.display = "block";	//show
+			document.getElementById("_x_tails").style.display = "none";	//hide
+		} else if (qs["id"] == "tails")
+		{
+			document.getElementById("_x_heads").style.display = "none"; 
+			document.getElementById("_x_tails").style.display = "block";
+		}
+	</script>
+	
+</body>
+
+</html>
