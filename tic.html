@@ -9,7 +9,11 @@
 <!-- MS STUFF -->
 <meta name="msapplication-TileImage" content="favicon.png" />
 <meta name="msapplication-TileColor" content="#0071C5" />
-
+<!-- bootstrap -->  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<link rel="stylesheet" href="lib/bootstrap-3.3.6-dist/css/bootstrap.min.css">  
+<script src="lib/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>  
+ 
 <style>
 
 .centered {
@@ -914,7 +918,9 @@ function game(val_)
 </head>
 
 <body onload="getID()">
-	<table class="dottedbdr centered">
+<div class="container">  
+    <div class="jumbotron dottedbdr centered">
+	<table>
 		<tr>
 			<td>
 <div align="center">
@@ -961,15 +967,16 @@ function game(val_)
 		</script>
 		<tr>	
 			<td>
-				HEADS (O) - 
+				HEADS (O) -&nbsp;
 			</td>
 			<td id="heads_o_text" name="heads_o_text">
 				0
 			</td>
 			<td>
+				&nbsp;&nbsp;&nbsp;
 			</td>
 			<td>
-				TAILS (X) -
+				TAILS (X) -&nbsp;
 			</td>
 			<td id="tails_x_text" name="tails_x_text">
 				0
@@ -979,15 +986,16 @@ function game(val_)
 			<!-- fix this part of the code... showing messagebox is just annoying... I want it to show the user in bold text -->
 			<tbody id="show_heads_" style="display:none;">
 				<td><b>
-					HEADS (O) - 
+					HEADS (O) -&nbsp;
 				</b></td>
 				<td id="heads_o_text" name="heads_o_text">
 					0
 				</td>
 				<td>
+					&nbsp;&nbsp;&nbsp;
 				</td>
 				<td>
-					TAILS (X) -
+					TAILS (X) -&nbsp;
 				</td>
 				<td id="tails_x_text" name="tails_x_text">
 					0
@@ -996,15 +1004,16 @@ function game(val_)
 
 			<tbody id="show_tails_" style="display:none;">
 				<td>
-					HEADS (O) - 
+					HEADS (O) -&nbsp;
 				</td>
 				<td id="heads_o_text" name="heads_o_text">
 					0
 				</td>
 				<td>
+					&nbsp;&nbsp;&nbsp;
 				</td>
 				<td><b>
-					TAILS (X) -
+					TAILS (X) -&nbsp;
 				</b></td>
 				<td id="tails_x_text" name="tails_x_text">
 					0
@@ -1134,7 +1143,8 @@ function game(val_)
 			document.getElementById("_x_tails").style.display = "block";
 		}
 	</script>
-	
+	</div>
+	</div>
 </body>
 
 </html>
