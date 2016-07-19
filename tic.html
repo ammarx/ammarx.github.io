@@ -220,6 +220,11 @@ function getID()
 	
 }
 
+function goHome()
+{
+	window.location.href='index.html';
+}
+
 var inst = 0;
 
 var n1 = "n/a";
@@ -927,10 +932,10 @@ function game(val_)
 	<table>
 		<tr>
 			<tbody style="text-align:center">
-				<a href="index.html"><h3 id="pvp">&#8592; Player vs Player</h3></a>
+				<h3 id="pvp" onclick="goHome()">&#8592; Player vs Player</h3>
 			</tbody>
 			<tbody style="text-align:center">
-				<a href="index.html"><h3 id="pvb">&#8592; Player vs Bot</h3></a>
+				<h3 id="pvb" onclick="goHome()">&#8592; Player vs Bot</h3>
 			</tbody>
 		</tr>
 		<script>
