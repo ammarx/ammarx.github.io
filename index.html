@@ -9,13 +9,23 @@
 <!-- MS STUFF -->
 <meta name="msapplication-TileImage" content="favicon.png" />
 <meta name="msapplication-TileColor" content="#0071C5" />
+<!-- bootstrap -->  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<link rel="stylesheet" href="lib/bootstrap-3.3.6-dist/css/bootstrap.min.css">  
+<script src="lib/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>  
 
 <script>
+	var showsettings = "false";
+	var heads = "false";
+	var tails = "false";
+
 	var timex;
 	var k = 0;
 	//goes to 28
 	function FLIP()
 	{
+		heads = "false";
+		tails = "false";
 
 		var n = Math.floor((Math.random() * 10) + 1); 
 		document.getElementById("coin").style.background = "url(coin-flip-tails-5124x183.png) " + k + "px 0";
@@ -31,10 +41,10 @@
 			{
 				//stop myself..
 				//head
-				document.getElementById('FLIPPED').style.display = 'block';
-				document.getElementById('FLIPPING').style.display = 'none';
-				document.getElementById('head').style.display = 'block';
-				document.getElementById('redo').style.display = 'block';
+				
+				document.getElementById('btn1').style.display = 'block';
+				document.getElementById('btn2').style.display = 'block';
+				heads = "true";
 				clearTimeout(timex);
 				k = 0;
 				
@@ -44,14 +54,58 @@
 			{
 				//stop myself..
 				//tails
-				document.getElementById('FLIPPED').style.display = 'block';
-				document.getElementById('FLIPPING').style.display = 'none';
-				document.getElementById('tails').style.display = 'block';
-				document.getElementById('redo').style.display = 'block';
+	
+				document.getElementById('btn1').style.display = 'block';
+				document.getElementById('btn2').style.display = 'block';
+				tails = "true";
 				clearTimeout(timex);
 				k = 0;
 			
 			}
+		}
+	}
+
+
+	function pvp()
+	{
+		if (heads == "true")
+		{
+			window.location.href='tic.html?id=heads&o=0&x=0&bot=false';
+		} else if (tails == "true") {
+			window.location.href='tic.html?id=tails&o=0&x=0&bot=false';
+		}
+	}
+
+	function pvb()
+	{
+		if (heads == "true")
+		{
+			window.location.href='tic.html?id=heads&o=0&x=0&bot=true';
+		} else if (tails == "true") {
+			window.location.href='tic.html?id=tails&o=0&x=0&bot=true';
+		}
+	}
+
+	
+	function settingsToggle()
+	{
+		if (showsettings == "false")
+		{
+			//i am showing you settings..
+			document.getElementById("btn2_").className = "button button4";
+			document.getElementById('bot_settings').style.display = 'block';
+			document.getElementById('bot_settings_').style.display = 'block';
+			document.getElementById('bot_settings__').style.display = 'block';
+				
+			showsettings = "true";
+		} else if (showsettings == "true") {
+			//i am NOT showing you settings
+			document.getElementById("btn2_").className = "button button5";
+			document.getElementById('bot_settings').style.display = 'none';
+			document.getElementById('bot_settings_').style.display = 'none';
+			document.getElementById('bot_settings__').style.display = 'none';
+
+			showsettings = "false";
 		}
 	}
 </script>
@@ -90,7 +144,7 @@
 	-webkit-transition-duration: 0.4s; /* Safari */
 	transition-duration: 0.4s;
 	cursor: pointer;
-	width: 160px;
+	width: 210px;
 }
 
 
@@ -155,80 +209,62 @@
 </head>
 
 <body onload="FLIP()">
-	<!-- ask the user to flip a coin -->
-	<table class="dottedbdr centered">
+<div class="container">  
+	<div class="jumbotron dottedbdr centered">
+	<table>
 		<tr>
 			<td>
-		
-	<table>
-		<tr>	
-			<td>
-				<div id="coinx" name="coinx">
-					<img id="coin" src="img_trans.gif">
+				<div id="coinx" name="coinx" align="center">
+					<a href="index.html"><img id="coin" src="img_trans.gif"></a>
 				</div>
 			</td>
-			<td style="width: 259px; vertical-align:top">
-				<div id="FLIPPING" name="FLIPPING">
-					<center><h2>~~~ FLIPPING ~~~</h2></center>
-				</div>
-				<div id="FLIPPED" name="FLIPPED" style="display: none;">
-					<center><h2>~~~ FLIPPED ~~~</h2></center>
-				</div>
-				
-				<div id="head" name="head" style="display: none;">
-					
-					<table>
-						<!--
-						<tr>
-							<td style="width: 249px; vertical-align:top">
-								<button class="button button2" onclick="window.location.href='tic.html?id=heads&o=0&x=0&bot=false'">HEADS - Proceed as 'O'</button>
-							</td>
-						</tr>
-						-->
-						<tr>
-							<td style="width: 249px; vertical-align:top">
-								<button class="button button2" onclick="window.location.href='tic.html?id=heads&o=0&x=0&bot=false'">Player vs Player</button>
-							</td>
-							<td style="width: 249px; vertical-align:top">
-								<button class="button button2" onclick="window.location.href='tic.html?id=heads&o=0&x=0&bot=true'">Player vs Bot</button>
-							</td>
+		</tr>
 
-						</tr>
-					</table>
+		<tr>
+			<td>
+				<div id="btn1" name="btn1" style="display:none;">
+					<button name="btn1_" id="btn1_" class="button button2" onclick="pvp()">Player vs Player</button>
 				</div>
+			</td>
+		</tr>
 
-				<div id="tails" name="tails" style="display: none;">
-					<table>
-						<tr>
-							<td style="width: 249px; vertical-align:top">
-								<button class="button button2" onclick="window.location.href='tic.html?id=tails&o=0&x=0&bot=false'">Player vs Player</button>
-							</td>
-							<td style="width: 249px; vertical-align:top">
-								<button class="button button2" onclick="window.location.href='tic.html?id=tails&o=0&x=0&bot=true'">Player vs Bot</button>
-							</td>
-
-						</tr>
-					</table>
+		<tr>
+			<td>
+				<div id="btn2" name="btn2" style="display:none;">
+					<button name="btn2_" id="btn2_" class="button button5" onclick="settingsToggle()">Player vs Bot</button>
 				</div>
-
-				<div id="redo" name="redo" style="display: none;">
-					<table>
-						<tr>
-							<tbody style="width: 249px; vertical-align:top">
-								<div style="text-align: center;">
-									<button class="button button3" onclick="window.location.href='index.html'">Click Here to Reflip</button>
-								</div>
-							</tbody>
-						</tr>
-					</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<div align="center" id="bot_settings" name="bot_settings" style="display:none;"><br>Difficulty Level</div>
+			</td>
+		</tr>
+	
+		<tr>
+			<td>
+				<div class="form-group" id="bot_settings_" name="bot_settings_" style="display:none;">
+					<!-- drop down comes here... -->
+					<select class="form-control" id="sel1">
+						<option>Easy</option>
+						<option>Medium</option>
+						<option>Unfair</option>
+					</select>
 				</div>
-
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<div id="bot_settings__" name="bot_settings__" style="display:none;">
+					<button name="btn3_" id="btn3_" class="button button1" onclick="pvb()">Start Bot Match</button>
+				</div>
 			</td>
 		</tr>
 	</table>
-			</td>
-		</td>
-	<table>
+	</div>
+</div>
 </body>
 
 </html>
