@@ -68,24 +68,41 @@
 
 	function pvp()
 	{
+		var dfklty = document.getElementById("sel1").value;
+
 		if (heads == "true")
 		{
-			window.location.href='tic.html?id=heads&o=0&x=0&bot=false';
+			window.location.href='tic.html?id=heads&o=0&x=0&bot=false&dlvl=' + dfklty;
 		} else if (tails == "true") {
-			window.location.href='tic.html?id=tails&o=0&x=0&bot=false';
+			window.location.href='tic.html?id=tails&o=0&x=0&bot=false&dlvl=' + dfklty;
 		}
 	}
 
 	function pvb()
 	{
+		var dfklty = document.getElementById("sel1").value;
+
 		if (heads == "true")
 		{
-			window.location.href='tic.html?id=heads&o=0&x=0&bot=true';
+			window.location.href='tic.html?id=heads&o=0&x=0&bot=true&dlvl=' + dfklty;
 		} else if (tails == "true") {
-			window.location.href='tic.html?id=tails&o=0&x=0&bot=true';
+			window.location.href='tic.html?id=tails&o=0&x=0&bot=true&dlvl=' + dfklty;
 		}
 	}
 
+
+	function changeBotBtn()
+	{
+		var dfklty = document.getElementById("sel1").value;
+		if (dfklty == "0") 
+		{
+			document.getElementById("btn3_").className = "button button1";
+		} else if (dfklty == "1") {
+			document.getElementById("btn3_").className = "button button2";
+		} else if (dfklty == "2") {
+			document.getElementById("btn3_").className = "button button3";
+		}
+	}
 	
 	function settingsToggle()
 	{
@@ -252,10 +269,10 @@
 			<td>
 				<div class="form-group" id="bot_settings_" name="bot_settings_" style="display:none;">
 					<!-- drop down comes here... -->
-					<select class="form-control" id="sel1">
-						<option>Easy</option>
-						<option>Medium</option>
-						<option>Unfair</option>
+					<select class="form-control" id="sel1" onchange="changeBotBtn()">
+						<option value="0" selected="selected">Easy</option>
+						<option value="1">Medium</option>
+						<option value="2">Unfair</option>
 					</select>
 				</div>
 			</td>
