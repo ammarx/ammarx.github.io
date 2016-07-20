@@ -150,6 +150,7 @@
 </style>
 
 <script>
+var dlvl = 0;
 var myParam_id;
 
 function getQueryStrings() 
@@ -179,7 +180,7 @@ function getID()
 	myParam_id = qs["id"];
 	head_score = qs["o"];
 	tails_score = qs["x"];
-	
+	dlvl = qs["dlvl"];
 	try {
 		isBot = qs["bot"];
 	} catch (err) {
@@ -479,53 +480,217 @@ function game(val_)
 	//=====================================================bot mode=====================================================
 	//=====================================================bot mode=====================================================
 	//=====================================================bot mode=====================================================
-
-	if (inst == 1 && isBot == "true" && gameWon == "false")
+	//bot is always o	
+	if (inst == 1 && isBot == "true" && gameWon == "false" && dlvl == "0")
 	{
-		//randomize!
-		for(;;)
+		randomizeSelection(); //no logic.. simple randomize it
+	} else if (inst == 1 && isBot == "true" && gameWon == "false" && dlvl == "1") {
+		//play defensive..
+		if (n1 == "n/a" && n2 == "x" && n3 == "x") {
+			game(1);
+		} else if (n1 == "x" && n2 == "n/a" && n3 == "x") {
+			game(2);
+		} else if (n1 == "x" && n2 == "x" && n3 == "n/a") {
+			game(3);
+		} else if (n4 == "n/a" && n5 == "x" && n6 == "x") {
+			game(4);
+		} else if (n4 == "x" && n5 == "n/a" && n6 == "x") {
+			game(5);
+		} else if (n4 == "x" && n5 == "x" && n6 == "n/a") {
+			game(6);
+		} else if (n7 == "n/a" && n8 == "x" && n9 == "x") {
+			game(7);
+		} else if (n7 == "x" && n8 == "n/a" && n9 == "x") {
+			game(8);
+		} else if (n7 == "x" && n8 == "x" && n9 == "n/a") {
+			game(9);
+		} else if (n1 == "n/a" && n4 == "x" && n7 == "x") {
+			game(1);
+		} else if (n1 == "x" && n4 == "n/a" && n7 == "x") {
+			game(4);
+		} else if (n1 == "x" && n4 == "x" && n7 == "n/a") {
+			game(7);
+		} else if (n2 == "n/a" && n5 == "x" && n8 == "x") {
+			game(2);
+		} else if (n2 == "x" && n5 == "n/a" && n8 == "x") {
+			game(5);
+		} else if (n2 == "x" && n5 == "x" && n8 == "n/a") {
+			game(8);
+		} else if (n3 == "n/a" && n6 == "x" && n9 == "x") {
+			game(3);
+		} else if (n3 == "x" && n6 == "n/a" && n9 == "x") {
+			game(6);
+		} else if (n3 == "x" && n6 == "x" && n9 == "n/a") {
+			game(9);
+		} else if (n1 == "n/a" && n5 == "x" && n9 == "x") {
+			game(1);
+		} else if (n1 == "x" && n5 == "n/a" && n9 == "x") {
+			game(5);
+		} else if (n1 == "x" && n5 == "x" && n9 == "n/a") {
+			game(9);
+		} else if (n3 == "n/a" && n5 == "x" && n7 == "x") {
+			game(3);
+		} else if (n3 == "x" && n5 == "n/a" && n7 == "x") {
+			game(5);
+		} else if (n3 == "x" && n5 == "x" && n7 == "n/a") {
+			game(7);
+		} else {
+			randomizeSelection();
+		}
+	} else if (inst == 1 && isBot == "true" && gameWon == "false" && dlvl == "2") {
+		//play defensive + offensive 
+		if (n1 == "n/a" && n2 == "o" && n3 == "o")
 		{
-			var selector = Math.floor((Math.random() * 9) + 1); 
-			if (n1 == "n/a" && selector == "1")
+			game(1);
+		} else if (n1 == "o" && n2 == "n/a" && n3 == "o") {
+			game(2);
+		} else if (n1 == "o" && n2 == "o" && n3 == "n/a") {
+			game(3);
+		} else if (n4 == "n/a" && n5 == "o" && n6 == "o") {
+			game(4);
+		} else if (n4 == "o" && n5 == "n/a" && n6 == "o") {
+			game(5);
+		} else if (n4 == "o" && n5 == "o" && n6 == "n/a") {
+			game(6);
+		} else if (n7 == "n/a" && n8 == "o" && n9 == "o") {
+			game(7);
+		} else if (n7 == "o" && n8 == "n/a" && n9 == "o") {
+			game(8);
+		} else if (n7 == "o" && n8 == "o" && n9 == "n/a") {
+			game(9);
+		} else if (n1 == "n/a" && n4 == "o" && n7 == "o") {
+			game(1);
+		} else if (n1 == "o" && n4 == "n/a" && n7 == "o") {
+			game(4);
+		} else if (n1 == "o" && n4 == "o" && n7 == "n/a") {
+			game(7);
+		} else if (n2 == "n/a" && n5 == "o" && n8 == "o") {
+			game(2);
+		} else if (n2 == "o" && n5 == "n/a" && n8 == "o") {
+			game(5);
+		} else if (n2 == "o" && n5 == "o" && n8 == "n/a") {
+			game(8);
+		} else if (n3 == "n/a" && n6 == "o" && n9 == "o") {
+			game(3);
+		} else if (n3 == "o" && n6 == "n/a" && n9 == "o") {
+			game(6);
+		} else if (n3 == "o" && n6 == "o" && n9 == "n/a") {
+			game(9);
+		} else if (n1 == "n/a" && n5 == "o" && n9 == "o") {
+			game(1);
+		} else if (n1 == "o" && n5 == "n/a" && n9 == "o") {
+			game(5);
+		} else if (n1 == "o" && n5 == "o" && n9 == "n/a") {
+			game(9);
+		} else if (n3 == "n/a" && n5 == "o" && n7 == "o") {
+			game(3);
+		} else if (n3 == "o" && n5 == "n/a" && n7 == "o") {
+			game(5);
+		} else if (n3 == "o" && n5 == "o" && n7 == "n/a") {
+			game(7);
+		} else if (n1 == "n/a" && n2 == "x" && n3 == "x") {
+			game(1);
+		} else if (n1 == "x" && n2 == "n/a" && n3 == "x") {
+			game(2);
+		} else if (n1 == "x" && n2 == "x" && n3 == "n/a") {
+			game(3);
+		} else if (n4 == "n/a" && n5 == "x" && n6 == "x") {
+			game(4);
+		} else if (n4 == "x" && n5 == "n/a" && n6 == "x") {
+			game(5);
+		} else if (n4 == "x" && n5 == "x" && n6 == "n/a") {
+			game(6);
+		} else if (n7 == "n/a" && n8 == "x" && n9 == "x") {
+			game(7);
+		} else if (n7 == "x" && n8 == "n/a" && n9 == "x") {
+			game(8);
+		} else if (n7 == "x" && n8 == "x" && n9 == "n/a") {
+			game(9);
+		} else if (n1 == "n/a" && n4 == "x" && n7 == "x") {
+			game(1);
+		} else if (n1 == "x" && n4 == "n/a" && n7 == "x") {
+			game(4);
+		} else if (n1 == "x" && n4 == "x" && n7 == "n/a") {
+			game(7);
+		} else if (n2 == "n/a" && n5 == "x" && n8 == "x") {
+			game(2);
+		} else if (n2 == "x" && n5 == "n/a" && n8 == "x") {
+			game(5);
+		} else if (n2 == "x" && n5 == "x" && n8 == "n/a") {
+			game(8);
+		} else if (n3 == "n/a" && n6 == "x" && n9 == "x") {
+			game(3);
+		} else if (n3 == "x" && n6 == "n/a" && n9 == "x") {
+			game(6);
+		} else if (n3 == "x" && n6 == "x" && n9 == "n/a") {
+			game(9);
+		} else if (n1 == "n/a" && n5 == "x" && n9 == "x") {
+			game(1);
+		} else if (n1 == "x" && n5 == "n/a" && n9 == "x") {
+			game(5);
+		} else if (n1 == "x" && n5 == "x" && n9 == "n/a") {
+			game(9);
+		} else if (n3 == "n/a" && n5 == "x" && n7 == "x") {
+			game(3);
+		} else if (n3 == "x" && n5 == "n/a" && n7 == "x") {
+			game(5);
+		} else if (n3 == "x" && n5 == "x" && n7 == "n/a") {
+			game(7);
+		} else {
+			randomizeSelection();
+		}
+
+	}
+
+
+	function randomizeSelection()
+	{
+		if (inst == 1 && isBot == "true" && gameWon == "false")
+		{
+			//randomize!
+			for(;;)
 			{
-				game(selector);
-				break;
-			} else if (n2 == "n/a" && selector == "2")
-			{
-				game(selector);
-				break;
-			} else if (n3 == "n/a" && selector == "3")	
-			{
-				game(selector);
-				break;
-			} else if (n4 == "n/a" && selector == "4")
-			{
-				game(selector);	
-				break;
-			} else if (n5 == "n/a" && selector == "5")
-			{
-				game(selector);
-				break;
-			} else if (n6 == "n/a" && selector == "6")
-			{
-				game(selector);
-				break;
-			} else if (n7 == "n/a" && selector == "7")
-			{
-				game(selector);
-				break;
-			} else if (n8 == "n/a" && selector == "8")
-			{
-				game(selector);
-				break;
-			} else if (n9 == "n/a" && selector == "9")
-			{
-				game(selector);
-				break;
+				var selector = Math.floor((Math.random() * 9) + 1); 
+				if (n1 == "n/a" && selector == "1")
+				{
+					game(selector);
+					break;
+				} else if (n2 == "n/a" && selector == "2")
+				{
+					game(selector);	
+					break;
+				} else if (n3 == "n/a" && selector == "3")	
+				{
+					game(selector);
+					break;
+				} else if (n4 == "n/a" && selector == "4")
+				{
+					game(selector);	
+					break;
+				} else if (n5 == "n/a" && selector == "5")
+				{
+					game(selector);
+					break;
+				} else if (n6 == "n/a" && selector == "6")
+				{
+					game(selector);
+					break;	
+				} else if (n7 == "n/a" && selector == "7")
+				{
+					game(selector);
+					break;
+				} else if (n8 == "n/a" && selector == "8")	
+				{
+					game(selector);
+					break;
+				} else if (n9 == "n/a" && selector == "9")
+				{
+					game(selector);
+					break;
+				}
 			}
 		}
 	}
-	
 	//check if user wins...
 	//HEADS (O) -   TAILS (X) -  
 	function checkwin()
@@ -551,7 +716,7 @@ function game(val_)
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=tails&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n1 == "o" && n2 == "o" && n3 == "o")	//---1
 	{
@@ -573,7 +738,7 @@ function game(val_)
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n4 == "x" && n5 == "x" && n6 == "x") //---2
 	{
@@ -596,7 +761,7 @@ function game(val_)
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=tails&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n4 == "o" && n5 == "o" && n6 == "o")	//---2
 	{
@@ -619,7 +784,7 @@ function game(val_)
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n7 == "x" && n8 == "x" && n9 == "x")	//---3
 	{
@@ -642,7 +807,7 @@ function game(val_)
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=tails&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1000);
 	} else if (n7 == "o" && n8 == "o" && n9 == "o")	//---3
 	{
@@ -665,7 +830,7 @@ function game(val_)
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n1 == "x" && n4 == "x" && n7 == "x")	//|||1
 	{
@@ -688,7 +853,7 @@ function game(val_)
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=tails&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n1 == "o" && n4 == "o" && n7 == "o")	//|||1
 	{
@@ -711,7 +876,7 @@ function game(val_)
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n2 == "x" && n5 == "x" && n8 == "x")	//|||2
 	{
@@ -734,7 +899,7 @@ function game(val_)
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=tails&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n2 == "o" && n5 == "o" && n8 == "o")	//|||2
 	{
@@ -757,7 +922,7 @@ function game(val_)
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n3 == "x" && n6 == "x" && n9 == "x")	//|||3
 	{
@@ -780,7 +945,7 @@ function game(val_)
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=tails&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n3 == "o" && n6 == "o" && n9 == "o")	//|||3
 	{
@@ -803,7 +968,7 @@ function game(val_)
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n1 == "x" && n5 == "x" && n9 == "x")	//\\\DIG
 	{
@@ -826,7 +991,7 @@ function game(val_)
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=tails&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n1 == "o" && n5 == "o" && n9 == "o")	//\\\DIG
 	{
@@ -849,7 +1014,7 @@ function game(val_)
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n3 == "x" && n5 == "x" && n7 == "x")	/////DIG
 	{
@@ -872,7 +1037,7 @@ function game(val_)
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 1;
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=tails&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n3 == "o" && n5 == "o" && n7 == "o")	/////DIG
 	{
@@ -895,7 +1060,7 @@ function game(val_)
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 1; 
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
 		}, 1500);
 	} else if (n1 != "n/a" && n2 != "n/a" && n3 != "n/a" && n4 != "n/a" && n5 != "n/a" && n6 != "n/a" && n7 != "n/a" && n8 != "n/a" && n9 != "n/a")
 	{
@@ -914,7 +1079,14 @@ function game(val_)
 		head_score = parseInt(document.getElementById("heads_o_text").innerHTML) + 0; 
 		tails_score = parseInt(document.getElementById("tails_x_text").innerHTML) + 0;
 		setTimeout(function(){
-			window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot;
+			//flip.
+			if (myParam_id == "heads") 
+			{
+				window.location.href='tic.html?id=tails&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
+			} else if (myParam_id == "tails") {
+				window.location.href='tic.html?id=heads&o=' + head_score + '&x=' + tails_score + '&bot=' + isBot + '&dlvl=' + dlvl;
+
+			}
 		}, 1500);
 	}
 	}
