@@ -15,7 +15,7 @@ var init_Menu = {
 //<button onclick="javascript:loadMusicDoc('{HTMLURL}','{TITLE}');">hi</button>
 
     //item_template: "<li><img onclick=\"loadMusicDoc('{PATH}','{TEXT}');\" width=64 height=64 src='data:image/png;base64,{XMLURL}'></img> <a href='{HTMLURL}'>{TITLE}</a></li>\n",
-    item_template: "<div class='col-sm-3'><br><div class='card' style='width:200px'><img class='card-img-top' onclick=\"loadMusicDoc('{PATH}','{TEXT}');\" src='data:image/png;base64,{XMLURL}' alt='Card image' style='width:100%'></img><div class='card-body'>     <a href=''>{TITLE}</a>   </div></div><br></div>\n",
+    item_template: "<div class='col-sm-12 col-md-6 col-lg-3'><br><div class='card' style='width:200px'><img class='card-img-top' onclick=\"loadMusicDoc('{PATH}','{TEXT}');\" src='data:image/png;base64,{XMLURL}' alt='Card image' style='width:100%'></img><div class='card-body'>     <a href=''>{TITLE}</a>   </div></div><br></div>\n",
     parse: function(opml) {
 
         var doc;
