@@ -4,7 +4,7 @@ function loadMusicDoc(url, title) {
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById("data").innerHTML = this.responseText; //debug line
-      document.getElementById("result").innerHTML = init_Menu.parse(this.responseText);
+      document.getElementById("result").innerHTML = init_Menu.parse(this.responseText); //init menu needs to be moved to Menus_Menu
     }
   };
   /*
