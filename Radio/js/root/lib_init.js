@@ -14,7 +14,8 @@ function loadInitDoc() {
 var init_Menu = {
 //<button onclick="javascript:loadMusicDoc('{HTMLURL}','{TITLE}');">hi</button>
 
-    item_template: "<li><img onclick=\"loadMusicDoc('{PATH}','{TEXT}');\" width=64 height=64 src='data:image/png;base64,{XMLURL}'></img> <a href='{HTMLURL}'>{TITLE}</a></li>\n",
+    //item_template: "<li><img onclick=\"loadMusicDoc('{PATH}','{TEXT}');\" width=64 height=64 src='data:image/png;base64,{XMLURL}'></img> <a href='{HTMLURL}'>{TITLE}</a></li>\n",
+    item_template: "<li><img onclick=\"loadMusicDoc('{PATH}','{TEXT}');\" width=64 height=64 src='data:image/png;base64,{XMLURL}'></img> </li>\n",
     parse: function(opml) {
 
         var doc;
