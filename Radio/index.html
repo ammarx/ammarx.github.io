@@ -1,42 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 
-<title>Ammar Radio - Project</title>
+    <title>Ammar Radio - Project</title>
 
 </head>
-<body style="background-color:#FFFAFA">
 
-<textarea id="data" style="width: 100%; height: 200px;"></textarea>
-<br>
+<body style="background-color:#FFFAFA;">
 
-<script src="js/root/lib_init.js"></script>
-<script src="js/root/lib_ext.js"></script>
-<script src="js/root/wait.js"></script>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <a class="navbar-brand" href="#" onclick="loadInitDoc();">Logo</a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="loadInitDoc();">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="loadInitDoc();">About</a>
+            </li>
+        </ul>
+    </nav>
 
-<script src="js/pnglib.js"></script>
-<script src="js/identicon.js"></script>
-<script src="js/md5.min.js"></script>
+    <br>
 
-<script type="text/javascript">
-    loadInitDoc();
+    <div class="container">
+        <br>
+        <textarea style="display: none" id="data" style="width: 100%; height: 200px;"></textarea>
+        <br>
 
-</script>
+        <script src="js/root/lib_init.js"></script>
+        <script src="js/root/lib_ext.js"></script>
+        <script src="js/root/wait.js"></script>
 
-	<center>
-		<div class="container">
-			<div class="row" id="result">
+        <script src="js/pnglib.js"></script>
+        <script src="js/identicon.js"></script>
+        <script src="js/md5.min.js"></script>
 
-			</div>
-		</div>
-	</center>
-	
-<iframe id="mplayer" src="http://tunein.com/embed/player/s24939?autoplay=true" style="width:100%;height:100px;" scrolling="no" frameborder="no"></iframe>
+        <script type="text/javascript">
+            loadInitDoc();
+        </script>
 
-</body></html>
+        <center>
+            <div class="row" id="result">
+
+            </div>
+        </center>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+
+    <nav class="navbar navbar-expand-sm fixed-bottom">
+        <iframe id="mplayer" src="http://tunein.com/embed/player/s24939?autoplay=false" style="width:25%;height:100px;" scrolling="no" frameborder="no"></iframe>
+
+    </nav>
+
+</body>
+
+</html>
