@@ -11,6 +11,28 @@ function loadInitDoc() {
   xmlhttp.send();
 }
 
+
+    
+function loadSearchDoc() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("data").innerHTML = this.responseText; 
+      document.getElementById("result").innerHTML = init_Menu.parse(this.responseText);
+    }
+  };
+  var searchString = document.getElementById("SearchStringData").value;
+  //searchString = Taylor Swift
+  searchString = searchString.replace(" ", "%2520");
+  var tmpl = "https://query.yahooapis.com/v1/public/yql?q=select URL, text, preset_id from xml where url='http://opml.radiotime.com/Search.ashx?query={_QUERY_STRING_SEARCH_}' and itemPath='//outline'&diagnostics=false";
+  tmpl = tmpl.replace('{_QUERY_STRING_SEARCH_}', searchString);
+  //alert(tmpl);
+  //we now have the full query generated
+  xmlhttp.open("GET", tmpl, true);
+  xmlhttp.send();
+}
+
+
 var init_Menu = {
 //<button onclick="javascript:loadMusicDoc('{HTMLURL}','{TITLE}');">hi</button>
 
