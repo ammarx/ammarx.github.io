@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>::: INDEX :::</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+    }
+    canvas {
+      display: block;
+      margin: auto;
+      background-color: #111;
+    }
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* Prevents scrolling */
+        height: 100%;
+    }
+  </style>
+</head>
+<body>
+<canvas id="patternCanvas" width="2400" height="2400"></canvas>
+
+<script>
+const canvas = document.getElementById('patternCanvas');
+const ctx = canvas.getContext('2d');
+const gridSize = 15;
+const cellSize = canvas.width / gridSize;
+
+// Color palette
+const colors = ['#00FFFF', '#0077FF', '#4422EE', '#EEEE22', '#00FFAA', '#FFFFFF'];
+
+// Draw grid
+for (let row = 0; row < gridSize; row++) {
+  for (let col = 0; col < gridSize; col++) {
+    const x = col * cellSize;
+    const y = row * cellSize;
+    drawRandomPattern(x, y, cellSize);
+  }
+}
+
+// Random pattern function
+function drawRandomPattern(x, y, size) {
+  const padding = 10;
+  const type = Math.floor(Math.random() * 6);
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  ctx.save();
+  ctx.translate(x + size / 2, y + size / 2);
+
+  switch (type) {
+    case 0:
+      drawStripedCircle(size / 2 - padding, color);
+      break;
+    case 1:
+      drawDottedSquare(size - 2 * padding, color);
+      break;
+    case 2:
+      drawOutlineCircle(size / 2 - padding, color);
+      break;
+    case 3:
+      drawFilledSquare(size - 2 * padding, color);
+      break;
+    case 4:
+      drawHorizontalStripes(size - 2 * padding, color);
+      break;
+    case 5:
+      drawOutlineSquare(size - 2 * padding, color);
+      break;
+  }
+
+  ctx.restore();
+}
+
+function drawStripedCircle(radius, color) {
+  const lines = 8;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, Math.PI * 2);
+  ctx.clip();
+  ctx.strokeStyle = color;
+  for (let i = -radius; i < radius; i += radius / lines) {
+    ctx.beginPath();
+    ctx.moveTo(-radius, i);
+    ctx.lineTo(radius, i);
+    ctx.stroke();
+  }
+  ctx.closePath();
+}
+
+function drawDottedSquare(size, color) {
+  const dots = 5;
+  ctx.fillStyle = color;
+  for (let i = 0; i < dots; i++) {
+    for (let j = 0; j < dots; j++) {
+      const dx = -size / 2 + (i + 0.5) * size / dots;
+      const dy = -size / 2 + (j + 0.5) * size / dots;
+      ctx.beginPath();
+      ctx.arc(dx, dy, 2, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  }
+}
+
+function drawOutlineCircle(radius, color) {
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+  ctx.stroke();
+}
+
+function drawFilledSquare(size, color) {
+  ctx.fillStyle = color;
+  ctx.fillRect(-size / 2, -size / 2, size, size);
+}
+
+function drawHorizontalStripes(size, color) {
+  const lines = 6;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  for (let i = 0; i < lines; i++) {
+    const y = -size / 2 + (i * size) / lines;
+    const w = size * (0.3 + 0.7 * Math.random());
+    ctx.beginPath();
+    ctx.moveTo(-w / 2, y);
+    ctx.lineTo(w / 2, y);
+    ctx.stroke();
+  }
+}
+
+function drawOutlineSquare(size, color) {
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.strokeRect(-size / 2, -size / 2, size, size);
+}
+</script>
+</body>
+</html>
+
